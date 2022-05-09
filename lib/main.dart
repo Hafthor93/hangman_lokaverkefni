@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hangman_lokaverkefni/home_app.dart';
+import 'package:hangman_lokaverkefni/home_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
         theme: ThemeData(
         ),
-      home: HomeApp(),
+      home: HomeApp(
+      ),
     );
   }
 }
+

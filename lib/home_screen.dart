@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hangman_lokaverkefni/constants.dart';
+import 'package:hangman_lokaverkefni/game_screen.dart';
+import 'package:hangman_lokaverkefni/buttons.dart';
 
 class HomeApp extends StatefulWidget {
   const HomeApp({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _HomeAppState extends State<HomeApp> {
     return Scaffold(
       backgroundColor: kMainColor,
       appBar: AppBar(
-        elevation: 1,
+        elevation: 0,
         backgroundColor: kMainColor,
         title: Text(
           "Hangman",
@@ -30,19 +31,29 @@ class _HomeAppState extends State<HomeApp> {
             Center(
               child: CircleAvatar(
                 radius: 200.0,
-                backgroundImage: AssetImage("images/gallows-with-desert-background-vector.jpg"),
+                backgroundImage: AssetImage(
+                    "images/gallows-with-desert-background-vector.jpg"),
               ),
             ),
-            Text("Welcome to Hangman!", style: kGoogleFonts,
+            Text(
+              "Welcome to Hangman!",
+              style: kGoogleFonts,
+            ),
+            SizedBox(
+              height: 20.0,
             ),
             Container(
-              child: ElevatedButton(
-                style: ButtonStyle(
-
-                ),
-                 onPressed: () {}
-                 ,child: Text("PLAY", style: kGoogleFonts,),
-              ),
+              child: ReusableCard(
+                  color: kMainColorDark,
+                  text: Text("START GAME"),
+                  onPress: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => GameScreen(),
+                      ),
+                    );
+                  }),
             ),
           ],
         ),
