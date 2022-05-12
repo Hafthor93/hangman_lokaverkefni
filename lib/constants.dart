@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,3 +40,25 @@ const List<String> kAlphabet = [
   "Y",
   "Z"
 ];
+
+const List<String> kHangmanWords = [
+  "Thor",
+  "Hulk",
+  "Hawkeye",
+  "Spiderman",
+  "Venom",
+  "Carnage",
+  "Daredevil",
+  "Punisher",
+  "Wolverine",
+  "Deadpool",
+  "Vision",
+  "Falcon",
+];
+
+
+const List marvelCharacters = [ ["Thor"], ["Spiderman"], ["Daredevil"], ["Hulk"], ["Venom"], ["Deadpool"], ["Carnage"], ["Punisher"] ];
+const List logosWords = [ ["Spotify"], ["Facebook"], ["Twitter"], ["Instagram"], ["Apple"], ["Microsoft"], ["Nike"], ["Youtube"], ["Netflix"] ];
+const List movieList = [ ["Inception"], ["Goodfellas"], [""]];
+
+

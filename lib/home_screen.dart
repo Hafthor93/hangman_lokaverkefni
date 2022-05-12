@@ -55,6 +55,8 @@ class _HomeAppState extends State<HomeApp> {
                     );
                   }),
             ),
+            //TODO: Settings page kannski
+            Container()
           ],
         ),
       ),
