@@ -6,15 +6,7 @@ import 'package:hangman_lokaverkefni/buttons.dart';
 import 'package:hangman_lokaverkefni/hangman_images.dart';
 import 'package:hangman_lokaverkefni/home_screen.dart';
 import 'package:hangman_lokaverkefni/main.dart';
-import 'package:english_words/english_words.dart';
-
-import 'game_keyboard.dart';
-
-class Game {
-  //adding the number of tries
-  static int tries = 0;
-  static List<String> selectedChar = [];
-}
+import 'hangman_widgets.dart';
 
 class GameScreen extends StatefulWidget {
   @override
@@ -22,9 +14,6 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-
-
-
   @override
   void initState() {
     obj = marvelCharacters[random.nextInt(marvelCharacters.length)];
@@ -34,13 +23,10 @@ class _GameScreenState extends State<GameScreen> {
     checkList = word.split("");
     checkList = checkList.toSet().toList();
     super.initState();
-
-
   }
 
   Random random = Random();
 
-  String spaceInWord = "-";
   List checkList = [];
   int finishedWords = 0;
   String word = "";
@@ -65,38 +51,10 @@ class _GameScreenState extends State<GameScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Stack(
-              children: [
-                //Adding images of the Hangman animation
-                //So if you fail another image will pop up on the screen
-                //Visibility makes that happen see hangman_images.dart
-                SizedBox(),
-                hangmanImage(Game.tries >= 0, "images/hang.png"),
-                hangmanImage(Game.tries >= 1, "images/head.png"),
-                hangmanImage(Game.tries >= 2, "images/body.png"),
-                hangmanImage(Game.tries >= 3, "images/rightarm.png"),
-                hangmanImage(Game.tries >= 4, "images/leftarm.png"),
-                hangmanImage(Game.tries >= 5, "images/rightleg.png"),
-                hangmanImage(Game.tries >= 6, "images/leftleg.png"),
-              ],
-            ),
+            child: HangmanImages(),
           ),
-            //TODO: lata hidden word hér
-            Wrap(
-              spacing: 2,
-              runSpacing: 2,
-              alignment: WrapAlignment.center,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: word
-                  .split('')
-                  .map(
-                    (e) => letter(
-                  e.toUpperCase(),
-                  !Game.selectedChar.contains(e.toUpperCase()),
-                ),
-              )
-                  .toList(),
-            ),
+          //TODO: lata hidden word hér
+          HiddenWord(word: word),
           //TODO: Lata keyboard her
           SizedBox(
             width: double.infinity,
@@ -110,7 +68,7 @@ class _GameScreenState extends State<GameScreen> {
                 return RawMaterialButton(
                   elevation: 10,
                   onPressed: Game.selectedChar.contains(e)
-                      ? null // we first check that we didn't selected the button before
+                      ? null
                       : () {
                           setState(() {
                             Game.selectedChar.add(e);
@@ -137,7 +95,16 @@ class _GameScreenState extends State<GameScreen> {
                 );
               }).toList(),
             ),
-    ),
+          ),
+          Container(
+            child: ScreenBackButtons(
+                color: kMainColorDark,
+                onPress: () {
+                  Navigator.pop(context);
+                },
+                text: Text("Back")),
+          ),
+          SizedBox(height: 28,)
         ],
       ),
     );

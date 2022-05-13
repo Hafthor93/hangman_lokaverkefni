@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hangman_lokaverkefni/category_page.dart';
 import 'package:hangman_lokaverkefni/constants.dart';
 import 'package:hangman_lokaverkefni/game_screen.dart';
 import 'package:hangman_lokaverkefni/buttons.dart';
@@ -50,13 +51,22 @@ class _HomeAppState extends State<HomeApp> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => GameScreen(),
+                        builder: (context) => CategoryPage(),
                       ),
                     );
                   }),
             ),
             //TODO: Settings page kannski
-            Container()
+            Container(
+              child: ReusableCard(
+                color: kMainColorDark,
+                text: Text("Settings"),
+                onPress: (){
+                  Navigator.push(MaterialPageRoute(builder: (context) => SettingsPage(),
+                  )
+                },
+              ),
+            )
           ],
         ),
       ),
