@@ -9,10 +9,16 @@ const kGoogleFonts = TextStyle(
   color: Colors.white,
 );
 
-const kCategoryStyle = TextStyle(
+const kTinyText = TextStyle(
   fontFamily: "Oswald",
-  fontSize: 35.0,
+  fontSize: 15.0,
   color: Colors.white,
+);
+
+const kDialogSize = TextStyle(
+  fontFamily: "Oswald",
+  fontSize: 25.0,
+  color: Colors.black,
 );
 
 const kMainColor = Color(0Xff8c9eff);
@@ -48,9 +54,34 @@ const List<String> kAlphabet = [
   "Z"
 ];
 
+final listOfWords = [
+  ["The strongest Avenger", "Thor"],
+  ["Your friendly neighborhood", "Spiderman"],
+  ["Smash", "Hulk"],
+  // ["Best selling video game", "Minecraft"],
+  // ["Has a cave with cool stuff", "Batman"],
+  // ["Kal-El", "Superman"],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
+  // ["", ""],
 
-const List marvelCharacters = [ ["Thor"], ["Spiderman"], ["Daredevil"], ["Hulk"], ["Venom"], ["Deadpool"], ["Carnage"], ["Punisher"] ];
-const List logosWords = [ ["Spotify"], ["Facebook"], ["Twitter"], ["Instagram"], ["Apple"], ["Microsoft"], ["Nike"], ["Youtube"], ["Netflix"] ];
-const List movieList = [ ["Inception"], ["Goodfellas"], ["Gladiator"], ["Whiplash"], ["Alien"], ["Memento"], ["Braveheart"], ["Interstellar"] ];
-const List soccerTeams = [ ["Arsenal"], ["Newcastle"], ["Liverpool"], ["Tottenham"], ["Chelsea"], ["Wolves"], ["Brighton"], ["Everton"] ];
+
+
+];
+
+// const List marvelCharacters = [ ["Thor"], ["Spiderman"], ["Daredevil"], ["Hulk"], ["Venom"], ["Deadpool"], ["Carnage"], ["Punisher"] ];
+// const List logosWords = [ ["Spotify"], ["Facebook"], ["Twitter"], ["Instagram"], ["Apple"], ["Microsoft"], ["Nike"], ["Youtube"], ["Netflix"] ];
+// const List movieList = [ ["Inception"], ["Goodfellas"], ["Gladiator"], ["Whiplash"], ["Alien"], ["Memento"], ["Braveheart"], ["Interstellar"] ];
+// const List soccerTeams = [ ["Arsenal"], ["Newcastle"], ["Liverpool"], ["Tottenham"], ["Chelsea"], ["Wolves"], ["Brighton"], ["Everton"] ];
 

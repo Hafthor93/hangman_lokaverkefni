@@ -16,9 +16,11 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   @override
   void initState() {
-    obj = marvelCharacters[random.nextInt(marvelCharacters.length)];
-    //desc = obj[0];
-    word = obj[0];
+    hangmanWords = listOfWords[random.nextInt(listOfWords.length)];
+
+    //I have a list in a list one for the hint and one for the actual word
+    hint = hangmanWords[0];
+    word = hangmanWords[1];
     word = word.toUpperCase();
     checkList = word.split("");
     checkList = checkList.toSet().toList();
@@ -27,11 +29,12 @@ class _GameScreenState extends State<GameScreen> {
 
   Random random = Random();
 
+
   List checkList = [];
   int finishedWords = 0;
   String word = "";
-  //String desc = "";
-  List<String> obj = [];
+  String hint = "";
+  List<String> hangmanWords = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,67 +49,152 @@ class _GameScreenState extends State<GameScreen> {
           style: kGoogleFonts,
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: HangmanImages(),
-          ),
-          //TODO: lata hidden word hér
-          HiddenWord(word: word),
-          //TODO: Lata keyboard her
-          SizedBox(
-            width: double.infinity,
-            height: 250.0,
-            child: GridView.count(
-              crossAxisCount: 7,
-              mainAxisSpacing: 8.0,
-              crossAxisSpacing: 8.0,
-              padding: EdgeInsets.all(8.0),
-              children: kAlphabet.map((e) {
-                return RawMaterialButton(
-                  elevation: 10,
-                  onPressed: Game.selectedChar.contains(e)
-                      ? null
-                      : () {
-                          setState(() {
-                            Game.selectedChar.add(e);
-                            print(Game.selectedChar);
-                            if (!marvelCharacters.contains(e.toUpperCase())) {
-                              Game.tries++;
-                            }
-                          });
-                        },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7.0),
-                  ),
-                  child: Text(
-                    e,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+      //SingleChildScrollView lagar öll renderflex sem ættu að koma á símum með minni skjá
+      // (held eg hehe)
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 10),
+                    Icon(
+                      Icons.heart_broken_sharp,
+                      color: kMainColorDark,
+                      size: 35,
                     ),
+                    SizedBox(width: 5),
+                    Text(
+                      "Lives Left: ${6 - Game.guesses}",
+                      style: kTinyText,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 180,
+                        ),
+                        Text("Hint", style: kTinyText,),
+                        HintButton(hint: hint),
+                        SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Center(
+                  child: HangmanImages(),
+                ),
+                //Hidden wordið sem user giskar á
+                HiddenWord(word: word),
+                //Keyboard ready to go
+                SizedBox(
+                  width: double.infinity,
+                  height: 250.0,
+                  child: GridView.count(
+                    crossAxisCount: 7,
+                    mainAxisSpacing: 8.0,
+                    crossAxisSpacing: 8.0,
+                    padding: EdgeInsets.all(10.0),
+                    children: kAlphabet.map((e) {
+                      return RawMaterialButton(
+                        elevation: 10,
+                        onPressed: Game.selectedLetter.contains(e)
+                            ? null
+                            : () {
+                                setState(() {
+                                  print(e);
+                                  Game.selectedLetter.add(e);
+                                  print(Game.selectedLetter);
+                                  if (checkList.contains(e)) {
+                                  finishedWords += 1;
+                                  if (finishedWords == checkList.length){
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text("Winner Winner Chicken Dinner!", style: kDialogSize,),
+                                          content: Image.asset("images/winner.jpeg"),
+                                          backgroundColor: kMainColorDark,
+                                          actions: [
+                                            //Win screen reset button
+                                            ElevatedButton(
+                                                onPressed: () {
+                                              setState(() {
+                                              Game.selectedLetter.clear();
+                                              finishedWords = 0;
+                                              Game.guesses = 0;
+                                              Navigator.push(context, MaterialPageRoute(builder: (context) => GameScreen()));
+                                            });
+                                          }, style: ElevatedButton.styleFrom(textStyle: kDialogSize, primary: kMainColor),
+                                                child: Text("Try Another Word", style: TextStyle(color: Colors.black),))
+                                          ],
+                                        ));
+                                  }
+                                  } else {
+                                    Game.guesses++;
+                                    if (Game.guesses == 6) {
+                                      // Loser screen reset button
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: Text("Looooser", style: kDialogSize,),
+                                            content: Image.asset("images/firsttime.png"),
+                                            backgroundColor: kMainColorDark,
+                                            actions: [
+                                              //Win screen reset button
+                                              ElevatedButton(onPressed: () {
+                                                setState(() {
+                                                  Game.selectedLetter.clear();
+                                                  finishedWords = 0;
+                                                  Game.guesses = 0;
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context) => GameScreen()));
+                                                });
+                                              }, style: ElevatedButton.styleFrom(textStyle: kDialogSize, primary: kMainColor),
+                                                  child: Text("Try Another Word", style: kDialogSize,))
+                                            ],
+                                          ));
+                                    }
+                                  }
+                                }
+                                );
+                              },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(7.0),
+                        ),
+                        child: Text(
+                          e,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        fillColor: Game.selectedLetter.contains(e)
+                            ? kMainColorDark
+                            : kMainColor,
+                      );
+                    }).toList(),
                   ),
-                  fillColor: Game.selectedChar.contains(e)
-                      ? kMainColorDark
-                      : kMainColor,
-                );
-              }).toList(),
-            ),
+                ),
+                Container(
+                  child: ScreenBackButtons(
+                      color: kMainColorDark,
+                      onPress: () {
+                        Navigator.pop(context);
+                      },
+                      text: Text("Back")),
+                ),
+                SizedBox(height: 5),
+              ]
           ),
-          Container(
-            child: ScreenBackButtons(
-                color: kMainColorDark,
-                onPress: () {
-                  Navigator.pop(context);
-                },
-                text: Text("Back")),
-          ),
-          SizedBox(height: 28,)
-        ],
+        ),
       ),
     );
   }
 }
+
+
