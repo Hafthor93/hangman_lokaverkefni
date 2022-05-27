@@ -55,28 +55,26 @@ const List<String> kAlphabet = [
 ];
 
 final listOfWords = [
-  ["The strongest Avenger", "Thor"],
-  ["Your friendly neighborhood", "Spiderman"],
+  ["The Strongest Avenger", "Thor"],
+  ["Your Friendly Neighborhood ....", "Spiderman"],
   ["Smash", "Hulk"],
-  // ["Best selling video game", "Minecraft"],
-  // ["Has a cave with cool stuff", "Batman"],
-  // ["Kal-El", "Superman"],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-  // ["", ""],
-
-
+  ["Has claws", "Wolverine"],
+  ["Has a cave full of gadgets", "Batman"],
+  ["Kal-El", "Superman"],
+  ["Blind but a good fighter!", "Daredevil"],
+  ["Symbiote", "Venom"],
+  ["Unkillable and grows limbs back", "Deadpool"],
+  ["Red Symbiote", "Carnage"],
+  ["I am inevitable", "Thanos"],
+  ["The Allfather", "Odin"],
+  ["Master Of Mischief", "Loki"],
+  ["Bow and arrow", "Hawkeye"],
+  ["Kills vampires", "Blade"],
+  ["Hes a tree", "Groot"],
+  ["Lives in the water", "Aquaman"],
+  ["Batmans duo", "Robin"],
+  ["Kid in a grownup body", "Shazam"],
+  ["Batmans nemesis", "Joker"],
 
 ];
 

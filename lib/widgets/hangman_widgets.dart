@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hangman_lokaverkefni/constants.dart';
-import 'package:hangman_lokaverkefni/hangman_widgets.dart';
+import 'package:hangman_lokaverkefni/widgets/hangman_widgets.dart';
 
 import 'hangman_images.dart';
 
@@ -105,6 +105,9 @@ class AboutWidget extends StatelessWidget{
       content: Text(hint,style: TextStyle(fontSize: 20),),
       titleTextStyle: TextStyle(color: Colors.black, fontSize: 25),
       backgroundColor: kMainColorDark,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
       actions: [
         ElevatedButton(
           style: ElevatedButton.styleFrom(

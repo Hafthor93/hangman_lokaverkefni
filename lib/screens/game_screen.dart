@@ -2,11 +2,11 @@ import 'dart:math';
 import 'dart:core';
 import 'package:flutter/material.dart';
 import 'package:hangman_lokaverkefni/constants.dart';
-import 'package:hangman_lokaverkefni/buttons.dart';
-import 'package:hangman_lokaverkefni/hangman_images.dart';
-import 'package:hangman_lokaverkefni/home_screen.dart';
+import 'package:hangman_lokaverkefni/buttons/buttons.dart';
+import 'package:hangman_lokaverkefni/widgets/hangman_images.dart';
+import 'package:hangman_lokaverkefni/screens/home_screen.dart';
 import 'package:hangman_lokaverkefni/main.dart';
-import 'hangman_widgets.dart';
+import '../widgets/hangman_widgets.dart';
 
 class GameScreen extends StatefulWidget {
   @override
@@ -116,6 +116,9 @@ class _GameScreenState extends State<GameScreen> {
                                     showDialog(
                                         context: context,
                                         builder: (context) => AlertDialog(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(20))
+                                          ),
                                           title: Text("Winner Winner Chicken Dinner!", style: kDialogSize,),
                                           content: Image.asset("images/winner.jpeg"),
                                           backgroundColor: kMainColorDark,
@@ -141,7 +144,10 @@ class _GameScreenState extends State<GameScreen> {
                                       showDialog(
                                           context: context,
                                           builder: (context) => AlertDialog(
-                                            title: Text("Looooser", style: kDialogSize,),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(Radius.circular(20))
+                                            ),
+                                            title: Text(" Looooser\n The word was $word", style: kDialogSize,),
                                             content: Image.asset("images/firsttime.png"),
                                             backgroundColor: kMainColorDark,
                                             actions: [
@@ -184,6 +190,12 @@ class _GameScreenState extends State<GameScreen> {
                   child: ScreenBackButtons(
                       color: kMainColorDark,
                       onPress: () {
+                        setState(() {
+                          Game.selectedLetter.clear();
+                          finishedWords = 0;
+                          Game.guesses = 0;
+                        });
+
                         Navigator.pop(context);
                       },
                       text: Text("Back")),

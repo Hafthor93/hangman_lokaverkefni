@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hangman_lokaverkefni/constants.dart';
-import 'package:hangman_lokaverkefni/game_screen.dart';
-import 'package:hangman_lokaverkefni/buttons.dart';
-import 'settings_page.dart';
+import 'package:hangman_lokaverkefni/screens/game_screen.dart';
+import 'package:hangman_lokaverkefni/buttons/buttons.dart';
 
 class HomeApp extends StatefulWidget {
   const HomeApp({Key? key}) : super(key: key);
@@ -60,18 +59,6 @@ class _HomeAppState extends State<HomeApp> {
               ),
               SizedBox(height: 20,),
               //TODO: Settings page kannski
-              Container(
-                child: ReusableCard(
-                  color: kMainColorDark,
-                  text: Text("SETTINGS"),
-                  onPress: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage(),
-                    ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 70),
             ],
           ),
         ),

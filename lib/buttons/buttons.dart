@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'hangman_widgets.dart';
+import '../constants.dart';
+import '../widgets/hangman_widgets.dart';
 
 class ReusableCard extends StatelessWidget {
   ReusableCard({required this.color, required this.onPress, required this.text});
